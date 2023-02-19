@@ -1,0 +1,47 @@
+<div id="main">
+  <div id="game-container">
+    <tetris-core #game (lineCleared)="onLineCleared()"></tetris-core>
+  </div>
+
+  <div id="game-controls">
+    <button
+      class="btn btn-success"
+      (click)="game.actionStart(); statusStarted()"
+    >
+      Start
+    </button>
+    <button class="btn btn-danger" (click)="game.actionStop(); statusStoped()">
+      Stop
+    </button>
+    <button class="btn btn-warning" (click)="game.actionReset(); statusReset()">
+      Reset
+    </button>
+    <button class="btn btn-secondary" (click)="game.actionRotate()">
+      Rotate
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="game.actionLeft(); leftButtonEvent()"
+    >
+      Left
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="game.actionRight(); rightButtonEvent()"
+    >
+      Right
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="game.actionDown(); downButtonEvent()"
+    >
+      Down
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="game.actionDrop(); dropButtonEvent()"
+    >
+      Drop
+    </button>
+  </div>
+</div>

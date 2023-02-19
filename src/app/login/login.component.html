@@ -1,0 +1,45 @@
+<div id="login">
+  <div id="container" class="container">
+    <form [formGroup]="playerDataForm" (ngSubmit)="submit()">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default"
+            >Username</span
+          >
+        </div>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Username"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+          formControlName="playerName"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">@</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="E-mail adress"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          formControlName="email"
+          required
+        />
+        <div *ngIf="playerDataForm"></div>
+      </div>
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+        [disabled]="!playerDataForm.valid"
+      >
+        Play The Game
+      </button>
+    </form>
+  </div>
+</div>

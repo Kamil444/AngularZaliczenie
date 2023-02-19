@@ -1,0 +1,72 @@
+<div id="main">
+  <form [formGroup]="selectedFilters">
+    <div class="list-control">
+      <h3>Filter List</h3>
+      <div class="input-group mb-3">
+        <select
+          class="custom-select"
+          id="inputGroupSelect02"
+          formControlName="eventFilter"
+        >
+          <option
+            *ngFor="let item of enumEventFilters | keyvalue"
+            value="{{ item.value }}"
+          >
+            {{ item.value }}
+          </option>
+        </select>
+        <div class="input-group-append">
+          <label class="input-group-text" for="inputGroupSelect02"
+            >Options</label
+          >
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <select
+          class="custom-select"
+          id="inputGroupSelect02"
+          formControlName="timeFilter"
+        >
+          <option
+            *ngFor="let item of enumTimeFilters | keyvalue"
+            value="{{ item.value }}"
+          >
+            {{ item.value }}
+          </option>
+        </select>
+        <div class="input-group-append">
+          <label class="input-group-text" for="inputGroupSelect02"
+            >Options</label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="list-display">
+      <div class="container p-2 justify-content-center" id="dupa">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Event Type</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let item of controlEventsDisplay
+                  | filterList : eventFilter : timeFilter;
+                index as i
+              "
+            >
+              <td>{{ i }}</td>
+              <td>{{ item.buttonPressed | uppercase }}</td>
+              <td>{{ item.time }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>

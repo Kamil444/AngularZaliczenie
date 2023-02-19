@@ -1,0 +1,18 @@
+#game-container {
+  display: flex;
+  margin-top: 5%;
+  margin-left: 2%;
+  margin-right: 2%;
+  justify-content: space-between;
+
+  .game-stats {
+    width: 25%;
+  }
+  .game-tetris {
+    border-style: outset;
+  }
+  .game-list {
+    border-style: dotted;
+    width: 30%;
+  }
+}

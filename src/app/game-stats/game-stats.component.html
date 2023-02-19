@@ -1,0 +1,23 @@
+<div id="main">
+  <h1 id="greeting">Welcome!</h1>
+  <h2 id="userName">{{ displayUserData.playerName }}</h2>
+  <div id="gameStats">
+    <div class="gameTime">
+      <h3 class="gameTimeText">
+        Time Played:
+        <a id="gameTimeValue">{{ displayStatistics.timePlayed }}</a>
+      </h3>
+    </div>
+    <div class="gameStatus">
+      <h3 class="gameStatusText">
+        Game Status:
+        <a id="gameStatusText">{{ displayStatistics.gameStatus }}</a>
+      </h3>
+    </div>
+    <div class="gameScore">
+      <h3 class="gameScoreText">
+        Game Score: <a id="gameScoreText">{{ displayStatistics.gameScore }}</a>
+      </h3>
+    </div>
+  </div>
+</div>
