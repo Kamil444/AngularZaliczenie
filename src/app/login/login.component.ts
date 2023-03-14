@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LogicService } from '../logic.service';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,11 @@ import { LogicService } from '../logic.service';
 export class LoginComponent implements OnInit {
   public playerDataForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private logicService: LogicService) {
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private _router: Router
+  ) {
     this.playerDataForm = this.fb.group({
       playerName: [
         '',
@@ -34,6 +39,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   public submit() {
-    this.logicService.passEvent(this.playerDataForm.value);
+    this.loginService.passLoginData(this.playerDataForm.value);
+    this._router.navigate(['tetris']);
   }
 }

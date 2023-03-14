@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LogicService } from '../logic.service';
+import { Subscription, take } from 'rxjs';
+import { LoginService } from '../login/login.service';
 import { playerData, gameStats } from '../types/types-data';
+import { GameStatsService } from './game-stats.service';
 
 @Component({
   selector: 'app-game-stats',
@@ -10,14 +12,26 @@ import { playerData, gameStats } from '../types/types-data';
 export class GameStatsComponent implements OnInit {
   public displayUserData!: playerData;
   public displayStatistics!: gameStats;
-  constructor(private logicService: LogicService) {
-    this.logicService.loginData$.subscribe((value) => {
-      this.displayUserData = value;
-    });
-    this.logicService.statisticsData$.subscribe((value) => {
-      this.displayStatistics = value;
-    });
+  private statisticDataSubscription: Subscription;
+  constructor(
+    private loginService: LoginService,
+    private gameStats: GameStatsService
+  ) {
+    this.loginService.loginData$
+      .pipe(take(1))
+      .subscribe((value) => {
+        this.displayUserData = value;
+      })
+      .unsubscribe();
+    this.statisticDataSubscription = this.gameStats.statisticsData$.subscribe(
+      (value) => {
+        this.displayStatistics = value;
+      }
+    );
   }
 
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.statisticDataSubscription.unsubscribe();
+  }
 }

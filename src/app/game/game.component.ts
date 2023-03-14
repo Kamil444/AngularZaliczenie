@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LogicService } from '../logic.service';
 import { gameStats, controlEvent } from '../types/types-data';
+import { GameStatsService } from '../game-stats/game-stats.service';
+import { GamelistService } from '../game-list/gamelist.service';
 
 @Component({
   selector: 'app-game',
@@ -11,7 +12,10 @@ export class GameComponent implements OnInit {
   private statistics: gameStats;
   private isPlayerPlaying: boolean = false;
   private controlEvent: controlEvent;
-  constructor(private logicService: LogicService) {
+  constructor(
+    private gameStatsService: GameStatsService,
+    private gameListService: GamelistService
+  ) {
     this.statistics = {
       timePlayed: 0,
       gameStatus: 'Press start to play!',
@@ -27,14 +31,14 @@ export class GameComponent implements OnInit {
     setInterval(() => {
       if (this.isPlayerPlaying === true) {
         this.statistics.timePlayed++;
-        this.logicService.passStats(this.statistics);
+        this.gameStatsService.passStats(this.statistics);
       }
     }, 1000);
   }
 
   public onLineCleared() {
     this.statistics.gameScore++;
-    this.logicService.passControlEventsArray(this.controlEvent);
+    this.gameListService.passControlEventsArray(this.controlEvent);
   }
   public statusStarted() {
     this.statistics.gameStatus = 'Started';
@@ -56,18 +60,18 @@ export class GameComponent implements OnInit {
   }
   public leftButtonEvent() {
     this.passControlEvents('Left Button');
-    this.logicService.passControlEventsArray(this.controlEvent);
+    this.gameListService.passControlEventsArray(this.controlEvent);
   }
   public rightButtonEvent() {
     this.passControlEvents('Right Button');
-    this.logicService.passControlEventsArray(this.controlEvent);
+    this.gameListService.passControlEventsArray(this.controlEvent);
   }
   public downButtonEvent() {
     this.passControlEvents('Down Button');
-    this.logicService.passControlEventsArray(this.controlEvent);
+    this.gameListService.passControlEventsArray(this.controlEvent);
   }
   public dropButtonEvent() {
     this.passControlEvents('Drop Button');
-    this.logicService.passControlEventsArray(this.controlEvent);
+    this.gameListService.passControlEventsArray(this.controlEvent);
   }
 }

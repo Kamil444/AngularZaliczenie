@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LogicService } from '../logic.service';
 import { eventFilters, timeFilters, controlEvent } from '../types/types-data';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription, take } from 'rxjs';
+import { GamelistService } from './gamelist.service';
 
 @Component({
   selector: 'app-game-list',
@@ -13,11 +14,16 @@ export class GameListComponent implements OnInit {
   public enumEventFilters: object = eventFilters;
   public controlEventsDisplay!: Array<controlEvent>;
   public selectedFilters: FormGroup;
+  private controllEventDisplaySubscription: Subscription;
 
-  constructor(private logicService: LogicService, private fb: FormBuilder) {
-    this.logicService.controlEvents$.subscribe((value) => {
-      this.controlEventsDisplay = value;
-    });
+  constructor(
+    private gameListService: GamelistService,
+    private fb: FormBuilder
+  ) {
+    this.controllEventDisplaySubscription =
+      this.gameListService.controlEvents$.subscribe((value) => {
+        this.controlEventsDisplay = value;
+      });
     this.selectedFilters = this.fb.group({
       eventFilter: 'All',
       timeFilter: 'Ascend',
@@ -25,6 +31,9 @@ export class GameListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.controllEventDisplaySubscription.unsubscribe();
+  }
 
   get eventFilter() {
     return this.selectedFilters.get('eventFilter')?.value;
