@@ -22,8 +22,17 @@ export class LoginComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(32),
+          Validators.maxLength(24),
           Validators.pattern('^[a-zA-Z ]*$'),
+        ],
+      ],
+      token: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(8),
+          Validators.pattern('^[0-9]*$'),
         ],
       ],
       email: [
@@ -39,7 +48,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   public submit() {
-    this.loginService.passLoginData(this.playerDataForm.value);
-    this._router.navigate(['tetris']);
+    this.loginService.passLoginData(
+      this.playerDataForm.value,
+      this.playerDataForm.get('token')?.value
+    );
+    this._router.navigate(['tetris', '#663399']);
   }
 }

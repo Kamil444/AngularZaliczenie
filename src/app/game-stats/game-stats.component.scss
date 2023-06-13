@@ -1,21 +1,38 @@
-#main {
-  width: auto;
-}
-#greeting {
+.container {
   position: absolute;
-  color: rgb(157, 219, 12);
-  text-align: left;
-  position: relative;
-  width: auto;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  margin: 0;
 }
-#userName {
-  position: relative;
-  color: rgb(13, 124, 221);
-  text-align: left;
+
+.game-stats {
   position: absolute;
-  width: auto;
+  top: auto;
+  display: flex;
+  min-width: 100%;
 }
-#gameStats {
-  position: absolute;
-  top: 30%;
+
+.column {
+  min-width: 33.3%;
+  text-align: center;
+  padding: 35px;
+  color: white;
+}
+
+.greeting {
+  padding-top: 10px;
+  font-family: "Varela Round";
+  text-align: center;
+  color: rgb(255, 255, 255);
+  min-width: 100%;
+  height: fit-content;
+  margin: 15px;
+  font-size: 50px;
+}
+.game-stats-text {
+  font-size: 30px;
+}
+#game-status {
+  padding: 20px;
 }

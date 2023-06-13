@@ -1,0 +1,53 @@
+<div class="container">
+  <form [formGroup]="filterHighScore">
+    <mat-form-field>
+      <mat-label>Score Filter</mat-label>
+      <mat-select
+        formControlName="scoreFilter"
+        (selectionChange)="filterData()"
+      >
+        <mat-option
+          *ngFor="let item of enumHighScoreFilter | keyvalue"
+          [value]="item.value"
+        >
+          {{ item.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <table mat-table [dataSource]="highScores$ | async" class="highscore-table">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [ngClass]="listColorChange(element.index)"
+      >
+        {{ element.index }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [ngClass]="listColorChange(element.index)"
+      >
+        {{ element.name }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef>Score</th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [ngClass]="listColorChange(element.index)"
+      >
+        {{ element.score }}
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let rows; columns: columnsToDisplay"></tr>
+  </table>
+</div>

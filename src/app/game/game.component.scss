@@ -1,34 +1,14 @@
-#main {
+.main {
   width: auto;
   height: fit-content;
-  background-color: adjust-hue($color: #000000d7, $degrees: 0);
 }
 
-#game-container {
+.game-container {
   display: flex;
   justify-content: center;
+  top: 0;
 }
 
-#game-controls {
-  display: flex;
-  justify-content: center;
-  .btn-primary {
-    margin-top: 5px;
-    margin-left: 2px;
-  }
-  .btn-success {
-    margin-top: 5px;
-    margin-right: 2px;
-  }
-  .btn-danger {
-    margin-top: 5px;
-    margin-right: 2px;
-  }
-  .btn-warning {
-    margin-top: 5px;
-    margin-right: 2px;
-  }
-  .btn-secondary {
-    margin-top: 5px;
-  }
+.mat-slider {
+  width: 300px;
 }

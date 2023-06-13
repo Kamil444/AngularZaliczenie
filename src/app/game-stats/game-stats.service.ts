@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { gameStats } from '../types/types-data';
+import { GameState } from '../types/types-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameStatsService {
-  public statisticsData$: Observable<gameStats>;
-  public gameStatsSubject: BehaviorSubject<gameStats>;
+  public statisticsData$: Observable<GameState>;
+  public gameStatsSubject: BehaviorSubject<GameState>;
+
+  private initObject: GameState = {
+    timePlayed: 0,
+    gameStatus: 'inital',
+    gameScore: 0,
+    gameMessage: 'Press Enter to Play!',
+  };
 
   constructor() {
-    this.gameStatsSubject = new BehaviorSubject({
-      timePlayed: 0,
-      gameStatus: 'Press start to play!',
-      gameScore: 0,
-    });
+    this.gameStatsSubject = new BehaviorSubject(this.initObject);
     this.statisticsData$ = this.gameStatsSubject.asObservable();
   }
 
-  public passStats(gameStatistics: gameStats) {
+  public passStats(gameStatistics: GameState) {
     this.gameStatsSubject.next(gameStatistics);
   }
 }

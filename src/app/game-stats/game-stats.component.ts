@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, take } from 'rxjs';
+import { take, takeUntil, takeWhile } from 'rxjs';
 import { LoginService } from '../login/login.service';
-import { playerData, gameStats } from '../types/types-data';
+import { playerData, GameState } from '../types/types-data';
 import { GameStatsService } from './game-stats.service';
 
 @Component({
@@ -11,27 +11,19 @@ import { GameStatsService } from './game-stats.service';
 })
 export class GameStatsComponent implements OnInit {
   public displayUserData!: playerData;
-  public displayStatistics!: gameStats;
-  private statisticDataSubscription: Subscription;
+  public displayStatistics!: GameState;
+
   constructor(
     private loginService: LoginService,
     private gameStats: GameStatsService
   ) {
-    this.loginService.loginData$
-      .pipe(take(1))
-      .subscribe((value) => {
-        this.displayUserData = value;
-      })
-      .unsubscribe();
-    this.statisticDataSubscription = this.gameStats.statisticsData$.subscribe(
-      (value) => {
-        this.displayStatistics = value;
-      }
-    );
+    this.loginService.loginData$.pipe(take(1)).subscribe((value) => {
+      this.displayUserData = value;
+    });
+    this.gameStats.statisticsData$.pipe(take(5)).subscribe((value) => {
+      this.displayStatistics = value;
+    });
   }
 
   ngOnInit(): void {}
-  ngOnDestroy(): void {
-    this.statisticDataSubscription.unsubscribe();
-  }
 }

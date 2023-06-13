@@ -1,11 +1,14 @@
 .main {
   text-align: center;
   background-color: rgb(162, 188, 214);
-  height: 100vh;
+  height: 100%;
   width: 100%;
+  top: 0;
 }
 .mainText {
+  top: 0;
   font-size: 200px;
+  height: 20%;
 }
 .bottomText {
   font-size: 50px;

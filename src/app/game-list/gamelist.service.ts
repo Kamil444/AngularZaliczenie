@@ -13,7 +13,7 @@ export class GamelistService {
   constructor() {
     this.controlEventsSubject = new BehaviorSubject([
       {
-        buttonPressed: '',
+        buttonPressed: 'List is empty!',
         time: 0,
       },
     ]);

@@ -1,72 +1,49 @@
-<div id="main">
-  <form [formGroup]="selectedFilters">
-    <div class="list-control">
-      <h3>Filter List</h3>
-      <div class="input-group mb-3">
-        <select
-          class="custom-select"
-          id="inputGroupSelect02"
-          formControlName="eventFilter"
+<div class="container">
+  <form [formGroup]="filerList">
+    <mat-form-field>
+      <mat-label>Action Type</mat-label>
+      <mat-select
+        formControlName="actionFilter"
+        (selectionChange)="filterData()"
+      >
+        <mat-option
+          *ngFor="let item of enumActionFilter | keyvalue"
+          [value]="item.value"
         >
-          <option
-            *ngFor="let item of enumEventFilters | keyvalue"
-            value="{{ item.value }}"
-          >
-            {{ item.value }}
-          </option>
-        </select>
-        <div class="input-group-append">
-          <label class="input-group-text" for="inputGroupSelect02"
-            >Options</label
-          >
-        </div>
-      </div>
-      <div class="input-group mb-3">
-        <select
-          class="custom-select"
-          id="inputGroupSelect02"
-          formControlName="timeFilter"
-        >
-          <option
-            *ngFor="let item of enumTimeFilters | keyvalue"
-            value="{{ item.value }}"
-          >
-            {{ item.value }}
-          </option>
-        </select>
-        <div class="input-group-append">
-          <label class="input-group-text" for="inputGroupSelect02"
-            >Options</label
-          >
-        </div>
-      </div>
-    </div>
-
-    <div class="list-display">
-      <div class="container p-2 justify-content-center">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Event Type</th>
-              <th scope="col">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="
-                let item of controlEventsDisplay
-                  | filterList : eventFilter : timeFilter;
-                index as i
-              "
-            >
-              <td>{{ i }}</td>
-              <td>{{ item.buttonPressed | uppercase }}</td>
-              <td>{{ item.time }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+          {{ item.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
+
+  <table
+    mat-table
+    [dataSource]="eventListToDIsplay$ | async"
+    class="action-table"
+    matSort
+  >
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+    <ng-container matColumnDef="button">
+      <th mat-header-cell *matHeaderCellDef>Button</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.buttonPressed | uppercase }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="time">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by Time"
+      >
+        Time
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+  </table>
 </div>

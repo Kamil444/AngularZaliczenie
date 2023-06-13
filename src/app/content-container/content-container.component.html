@@ -1,5 +1,42 @@
-<div id="game-container">
-  <div class="game-stats"><app-game-stats></app-game-stats></div>
-  <div class="game-tetris"><app-game></app-game></div>
-  <div class="game-list"><app-game-list></app-game-list></div>
+<div class="container">
+  <mat-grid-list cols="12" rowHeight="10vh" gutterSize="0px">
+    <mat-grid-tile
+      colspan="12"
+      rowspan="2"
+      class="game-stats"
+      [ngStyle]="{
+        background: backGroundBar,
+        'border-color': borderColor
+      }"
+    >
+      <app-game-stats></app-game-stats>
+    </mat-grid-tile>
+    <mat-grid-tile
+      colspan="4"
+      rowspan="8"
+      class="game-highscore"
+      [ngStyle]="{
+        background: backGroundTile
+      }"
+      ><app-highscore></app-highscore
+    ></mat-grid-tile>
+    <mat-grid-tile
+      colspan="4"
+      rowspan="8"
+      class="game-tetris"
+      [ngStyle]="{
+        background: backGroundTile
+      }"
+      ><app-game></app-game
+    ></mat-grid-tile>
+    <mat-grid-tile
+      colspan="4"
+      rowspan="8"
+      class="game-list"
+      [ngStyle]="{
+        background: backGroundTile
+      }"
+      ><app-game-list></app-game-list
+    ></mat-grid-tile>
+  </mat-grid-list>
 </div>

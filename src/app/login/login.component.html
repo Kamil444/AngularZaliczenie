@@ -1,45 +1,88 @@
-<div id="login">
-  <div id="container" class="container">
-    <form [formGroup]="playerDataForm" (ngSubmit)="submit()">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-default"
-            >Username</span
-          >
-        </div>
 
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Username"
-          aria-label="Default"
-          aria-describedby="inputGroup-sizing-default"
-          formControlName="playerName"
-        />
-      </div>
-
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">@</span>
-        </div>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="E-mail adress"
-          aria-label="Username"
-          aria-describedby="basic-addon1"
-          formControlName="email"
-          required
-        />
-        <div *ngIf="playerDataForm"></div>
-      </div>
-      <button
-        class="btn btn-outline-success my-2 my-sm-0"
-        type="submit"
-        [disabled]="!playerDataForm.valid"
+<div class="container"></div>
+<mat-grid-list cols="10" rowHeight="100%">
+  <mat-grid-tile colspan="4"></mat-grid-tile>
+  <mat-grid-tile colspan="2"
+    ><div class="login-content">
+      <h1 class="login-text">Sign Up</h1>
+      <form
+        [formGroup]="playerDataForm"
+        class="login-input"
+        (ngSubmit)="submit()"
       >
-        Play The Game
-      </button>
-    </form>
-  </div>
-</div>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            matTooltip="Name must be 5-16 characters. Example: HawtBabe69"
+            matTooltipPosition="right"
+            placeholder="Enter your name"
+            formControlName="playerName"
+          />
+          <mat-error
+            *ngIf="this.playerDataForm.get('playerName')?.errors?.['maxlength'] || this.playerDataForm.get('playerName')?.errors?.['minlength']"
+            >Name must be 5-16 characters</mat-error
+          >
+          <mat-error
+            *ngIf="this.playerDataForm.get('playerName')?.errors?.['required']"
+            >Name is required</mat-error
+          >
+          <mat-error
+            *ngIf="this.playerDataForm.get('playerName')?.errors?.['pattern']"
+            >Name must contain only letters</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input
+            matInput
+            matTooltip="example E-mail: example@gmail.com "
+            matTooltipPosition="right"
+            placeholder="Enter your E-mail"
+            formControlName="email"
+          />
+          <mat-error
+            *ngIf="this.playerDataForm.get('email')?.errors?.['required']"
+            >E-mail is required</mat-error
+          >
+          <mat-error
+            *ngIf="this.playerDataForm.get('email')?.errors?.['pattern']"
+            >Invalid E-mail</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Token</mat-label>
+          <input
+            matInput
+            matTooltip="example token: 12345 "
+            matTooltipPosition="right"
+            placeholder="Enter token"
+            formControlName="token"
+            color="primary"
+          />
+          <mat-error
+            *ngIf="this.playerDataForm.get('token')?.errors?.['required']"
+            >Toekn is required</mat-error
+          >
+          <mat-error
+            *ngIf="this.playerDataForm.get('token')?.errors?.['minlength'] || this.playerDataForm.get('token')?.errors?.['maxlength']"
+            >Token must be between 4-8 numbers</mat-error
+          >
+          <mat-error
+            *ngIf="this.playerDataForm.get('token')?.errors?.['pattern']"
+            >Token must contain only numbers</mat-error
+          >
+        </mat-form-field>
+        <button
+          class="login-button"
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Play the Game!
+        </button>
+      </form>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="4"></mat-grid-tile>
+</mat-grid-list>

@@ -1,47 +1,15 @@
-<div id="main">
-  <div id="game-container">
-    <tetris-core #game (lineCleared)="onLineCleared()"></tetris-core>
-  </div>
-
-  <div id="game-controls">
-    <button
-      class="btn btn-success"
-      (click)="game.actionStart(); statusStarted()"
-    >
-      Start
-    </button>
-    <button class="btn btn-danger" (click)="game.actionStop(); statusStoped()">
-      Stop
-    </button>
-    <button class="btn btn-warning" (click)="game.actionReset(); statusReset()">
-      Reset
-    </button>
-    <button class="btn btn-secondary" (click)="game.actionRotate()">
-      Rotate
-    </button>
-    <button
-      class="btn btn-primary"
-      (click)="game.actionLeft(); leftButtonEvent()"
-    >
-      Left
-    </button>
-    <button
-      class="btn btn-primary"
-      (click)="game.actionRight(); rightButtonEvent()"
-    >
-      Right
-    </button>
-    <button
-      class="btn btn-primary"
-      (click)="game.actionDown(); downButtonEvent()"
-    >
-      Down
-    </button>
-    <button
-      class="btn btn-primary"
-      (click)="game.actionDrop(); dropButtonEvent()"
-    >
-      Drop
-    </button>
+<div class="main" (keydown)="keyPressed($event)">
+  <mat-slider
+    min="0"
+    max="16777215"
+    step="100"
+    (change)="selectColor($event)"
+  ></mat-slider>
+  <div class="game-container">
+    <tetris-core
+      #game
+      (lineCleared)="onLineCleared()"
+      (gameOver)="gameOver()"
+    ></tetris-core>
   </div>
 </div>

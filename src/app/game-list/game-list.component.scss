@@ -1,17 +1,26 @@
-#main {
+.container {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  padding-top: 5px;
+  min-width: 70%;
+  max-width: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  max-height: 95%;
+}
 
-  .list-control {
-    width: 100%;
-    margin-top: 4%;
-    margin-left: 4%;
-  }
-  .custom-select {
-    width: 70%;
-  }
-  .table {
-    height: fit-content;
-  }
+.action-table {
+  display: block;
+  overflow-y: auto;
+}
+.mat-column-button {
+  width: 20%;
+}
+.mat-column-index {
+  width: 20%;
+}
+.mat-column-time {
+  width: 20%;
+  text-align: center;
 }
